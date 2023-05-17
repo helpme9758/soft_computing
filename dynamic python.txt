@@ -586,3 +586,129 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+Q)Cartetion-------------------------------------------------------------------------------------------------
+class FuzzySet:
+    def __init__(self, n):
+        self.nr = [0.0] * n
+        self.dr = [0.0] * n
+        self.n = n
+
+def getval(ch, x):
+    m = FuzzySet(ch)
+    print(f"\nEnter the set {x}")
+    for i in range(m.n):
+        f = float(input(f"Numerator element {i + 1}: "))
+        m.nr[i] = f
+        g = float(input(f"Denominator element {i + 1}: "))
+        m.dr[i] = g
+    return m
+
+def printval(m, x):
+    print(f"\nThe set {x} = (", end="")
+    for i in range(m.n):
+        print(f"{m.nr[i]:6.1f} / {m.dr[i]:6.1f}", end="")
+        if i != m.n - 1:
+            print(",", end="")
+    print(")")
+
+def algebraic_product(a, b):
+    temp = FuzzySet(a.n)
+    for i in range(a.n):
+        temp.nr[i] = a.nr[i] * b.nr[i]
+        temp.dr[i] = a.dr[i]
+    return temp
+
+def algebraic_sum(a, b):
+    temp = FuzzySet(a.n)
+    for i in range(a.n):
+        temp.nr[i] = (a.nr[i] + b.nr[i]) - (a.nr[i] * b.nr[i])
+        temp.dr[i] = a.dr[i]
+    return temp
+
+def cartesian_product(a, b):
+    prod = [[0.0] * b.n for _ in range(a.n)]
+    for i in range(a.n):
+        for j in range(b.n):
+            if a.nr[i] < b.nr[j]:
+                prod[i][j] = a.nr[i]
+            else:
+                prod[i][j] = b.nr[i]
+            print(f"{prod[i][j]}\t", end="")
+        print()
+
+c = int(input("Enter the number of components: "))
+a = getval(c, "A")
+b = getval(c, "B")
+printval(a, "A")
+printval(b, "B")
+
+while True:
+    print("\n1. Algebraic sum\n2. Algebraic product\n3. Cartesian product")
+    ch = int(input("Enter your choice: "))
+    if ch == 1:
+        result = algebraic_sum(a, b)
+        printval(result, "D")
+    elif ch == 2:
+        result = algebraic_product(a, b)
+        printval(result, "E")
+    elif ch == 3:
+        cartesian_product(a, b)
+        break
+    else:
+        break
+
+
+
+
+Q)Lambdacut---------------------------------------------------------------------------------------------------------------------
+class FuzzySet:
+    def __init__(self):
+        self.nr = [0.0] * 10
+        self.dr = [0.0] * 10
+        self.n = 0
+
+
+def getval(ch, x):
+    m = FuzzySet()
+    m.n = ch
+    print("\nEnter the set", x)
+    for i in range(m.n):
+        f = float(input("Numerator element {}: ".format(i + 1)))
+        m.nr[i] = f
+        g = float(input("Denominator element {}: ".format(i + 1)))
+        m.dr[i] = g
+    return m
+
+
+def printval(m, x):
+    print("\nThe set", x, "= (", end="")
+    for i in range(m.n):
+        print("{:.1f} / {:.1f}".format(m.nr[i], m.dr[i]), end="")
+        if i != m.n - 1:
+            print(",", end="")
+    print(")")
+
+
+def lambda_cut_set(a, L):
+    temp = FuzzySet()
+    temp.n = a.n
+    for i in range(a.n):
+        if a.nr[i] > L:
+            temp.nr[i] = a.nr[i]
+            temp.dr[i] = a.dr[i]
+            print("{{({:.1f}, 1) \t ".format(temp.dr[i]), end="")
+        else:
+            print("{{({:.1f}, 0) \t ".format(temp.dr[i]), end="")
+    print("}")
+
+
+c = int(input("Enter the number of components: "))
+a = getval(c, "A")
+printval(a, "A")
+L = float(input("Enter the value for lambda: "))
+lambda_cut_set(a, L)
+
+Q)Cartetion
