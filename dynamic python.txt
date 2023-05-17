@@ -348,6 +348,18 @@ def apply_linguistic_modifier(fuzzy_set, modifier_func):
     return modified_set
 
 
+
+
+Q12)fat--------------------------------------------------------------------------------
+def apply_linguistic_modifier(fuzzy_set, modifier_func):
+    modified_set = {}
+
+    for element, membership in fuzzy_set.items():
+        modified_membership = modifier_func(membership)
+        modified_set[element] = modified_membership
+
+    return modified_set
+
 # Example usage
 fat = {'0.1': 0.1, '0.4': 0.4, '0.2': 0.2, '0.8': 0.8, '0.7': 0.7}
 
@@ -356,6 +368,8 @@ very_very_fat = apply_linguistic_modifier(fat, lambda x: x ** 3)
 
 print("Fuzzy set for 'very very fat':")
 print(very_very_fat)
+
+
 
 
 Q13)Dedicated----------------------------------------------------------------------------
