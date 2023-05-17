@@ -31,7 +31,7 @@ while True:
 union = fuzzy_union(set1, set2)
 
 # Print the union set
-print("Intersection of the two fuzzy sets:")
+print("Union of the two fuzzy sets:")
 print(union)
 
 
