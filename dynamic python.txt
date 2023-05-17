@@ -711,4 +711,4 @@ printval(a, "A")
 L = float(input("Enter the value for lambda: "))
 lambda_cut_set(a, L)
 
-Q)Cartetion
+
